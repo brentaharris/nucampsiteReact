@@ -9,7 +9,8 @@ export const validateCommentForm = (values) => {
     } else if (values.author.length > 15) {
         errors.author = 'Must be 15 characters or less.'
     }
-    // console.log(values);
-    // console.log(errors);
     return errors;
 }
+
+//modal close - click outside or esc
+//would like to save comment text progress if modal is closed (unsubmitted). useRef/state dependency array see if we can save the comment text state 

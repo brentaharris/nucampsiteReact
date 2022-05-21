@@ -1,10 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, FormGroup, Label } from 'reactstrap';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { validateCommentForm } from '../../utils/validateCommentForm';
 
 const CommentForm = ({ campsiteId }) => {
     const [ modalOpen, setModalOpen ] = useState(false);
+    const [ commentText, setCommentText ] = useState('');
+    const formRef = useRef();
+
+    //close modal window with ESC key
+    useEffect(() => {
+        const close = (e) => {
+          if(e.keyCode === 27){
+            setCommentText(formRef.current.values.commentText)
+            setModalOpen(false)
+          }
+        }
+        window.addEventListener('keydown', close)
+      return () => window.removeEventListener('keydown', close)
+    },[])
+
 
     const handleSubmit = (values) => {
         const comment = {
@@ -13,23 +28,37 @@ const CommentForm = ({ campsiteId }) => {
             author: values.author,
             text: values.commentText
         };
+        setCommentText('');
         setModalOpen(false);
     }
 
+    const openModal = () => {
+        setModalOpen(true);
+        console.log(formRef.current)
+        setCommentText(formRef.current.values.commentText)
+    }
+
+    const closeModal = () => {
+        setCommentText(formRef.current.values.commentText)
+        setModalOpen(false)
+    }
+
+
     return(
         <>
-            <Button outline onClick={() => setModalOpen(true)}>
+            <Button outline onClick={openModal}>
                 <i className='fa fa-pencil fa-lg' /> Add Comment
             </Button>
-            <Modal isOpen={modalOpen}>
+            <Modal isOpen={modalOpen} backdrop={true} toggle={closeModal}>
                 <ModalHeader toggle={() => setModalOpen(false)}>
                     Add Comment
                 </ModalHeader>
                 <ModalBody>
                     <Formik 
-                        initialValues={{rating: undefined, author: '', commentText: '' }}
+                        initialValues={{rating: undefined, author: '', commentText: commentText }}
                         onSubmit={handleSubmit}
                         validate={validateCommentForm}
+                        innerRef={formRef}
                     >
                         <Form>
                             <FormGroup>
