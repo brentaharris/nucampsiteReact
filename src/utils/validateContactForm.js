@@ -2,7 +2,7 @@ export const validateContactForm = (values) => {
     const errors = {};
 
     if (!values.firstName){
-        errors.firstName = 'required';
+        errors.firstName = 'Required';
     } else if (values.firstName.length < 2 ){
         errors.firstName = 'Must be at least 2 characters.';
     } else if (values.firstName.length > 15 ){
@@ -10,7 +10,7 @@ export const validateContactForm = (values) => {
     }
 
     if (!values.lastName){
-        errors.lastName = 'required';
+        errors.lastName = 'Required';
     } else if (values.firstName.length < 2 ){
         errors.lastName = 'Must be at least 2 characters.';
     } else if (values.firstName.length > 15 ){
