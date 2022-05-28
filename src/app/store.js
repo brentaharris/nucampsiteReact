@@ -1,16 +1,18 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
-import { campsitesReducer } from '../features/campsites/campsitesSlice';
-import { commentsReducer } from '../features/comments/commentSlice';
-import { partnersReducer } from '../features/partners/partnersSlice';
-import { promotionsReducer } from '../features/promotions/PromotionsSlice';
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import logger from "redux-logger";
+import { campsitesReducer } from "../features/campsites/campsitesSlice";
+import { commentsReducer } from "../features/comments/commentSlice";
+import { partnersReducer } from "../features/partners/partnersSlice";
+import { promotionsReducer } from "../features/promotions/PromotionsSlice";
+import { userReducer } from "../features/user/userSlice";
 
 export const store = configureStore({
   reducer: {
     campsites: campsitesReducer,
     comments: commentsReducer,
     partners: partnersReducer,
-    promotions: promotionsReducer
+    promotions: promotionsReducer,
+    user: userReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([logger])
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([logger]),
 });
