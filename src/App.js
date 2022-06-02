@@ -5,11 +5,13 @@ import ContactPage from "./pages/ContactPage";
 import HomePage from "./pages/HomePage";
 import "./App.css";
 import { fetchCampsites } from "./features/campsites/campsitesSlice";
+import { fetchPartners } from './features/partners/partnersSlice';
 import CampsitesDirectoryPage from "./pages/CampsitesDirectoryPage";
 import CampsiteDetailPage from "./pages/CampsiteDetailPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutPage from "./pages/AboutPage";
+
 
 // start json server: json-server -H 0.0.0.0 --watch db.json -p 3001 -d 2000
 // 
@@ -19,6 +21,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchCampsites());
+    dispatch(fetchPartners());
   }, [dispatch]);
 
   return (
