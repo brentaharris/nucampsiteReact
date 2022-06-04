@@ -1,19 +1,18 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import ContactPage from "./pages/ContactPage";
-import HomePage from "./pages/HomePage";
-import "./App.css";
 import { fetchCampsites } from "./features/campsites/campsitesSlice";
 import { fetchPartners } from './features/partners/partnersSlice';
 import { fetchPromotions } from "./features/promotions/PromotionsSlice";
+import { fetchComments } from "./features/comments/commentSlice";
+import ContactPage from "./pages/ContactPage";
+import HomePage from "./pages/HomePage";
 import CampsitesDirectoryPage from "./pages/CampsitesDirectoryPage";
 import CampsiteDetailPage from "./pages/CampsiteDetailPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutPage from "./pages/AboutPage";
-
-
+import "./App.css";
 
 // start json server: json-server -H 0.0.0.0 --watch db.json -p 3001 -d 2000
 // 
@@ -25,6 +24,7 @@ function App() {
     dispatch(fetchCampsites());
     dispatch(fetchPartners());
     dispatch(fetchPromotions());
+    dispatch(fetchComments());
   }, [dispatch]);
 
   return (
